@@ -12,6 +12,15 @@ def calculate_hate(agent, model):
 
 
 def racism(agent, model):
+
     calculate_hate(agent, model)
 
+    if agent.nationalism > 40:
+        cellmates = model.grid.get_cell_list_contents([agent.pos])
+        map(model.schedule.remove, cellmates)
+        model.schedule.remove(agent)
+        #model.grid._remove_agent(agent.pos,agent)
+
+        for i in cellmates:
+            model.grid._remove_agent(i.pos, i)
 

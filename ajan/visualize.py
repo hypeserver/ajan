@@ -11,7 +11,7 @@ def agent_portrayal(agent):
                  "Layer": 1,
                  "r": 0.5}
     
-    if agent.nationalism > 50:
+    if agent.nationalism > 20:
         portrayal["Layer"] = 1
         portrayal["r"] = 1.5
 
