@@ -29,7 +29,6 @@ class PersonAgent(Agent):
     def increase_hate(self, model):
         cellmates = model.grid.get_cell_list_contents([self.pos])
         cellmates_hated = [cellmate for cellmate in cellmates if cellmate.ethnicity != self.ethnicity]
-        print(len(cellmates), len(cellmates_hated))
         self.nationalism += len(cellmates_hated)
         # other = random.choice(cellmates)
         # other.wealth += 1
