@@ -15,7 +15,8 @@ class WorldModel(Model):
             x = random.randrange(self.grid.width)
             y = random.randrange(self.grid.height)
             ethnicity = (((x+1) * (y+1)) / self.grid.width * self.grid.height) * len(Ethnicities)
-            a = PersonAgent(i, ethnicty=int(ethnicity))
+            a = PersonAgent(unique_id=i,
+                            ethnicity=int(ethnicity))
             self.schedule.add(a)
             # Add the agent to a random grid cell
             self.grid.place_agent(a, (x, y))
