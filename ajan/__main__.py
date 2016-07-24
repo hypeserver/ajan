@@ -1,14 +1,18 @@
 from model import WorldModel
 import matplotlib.pyplot as plt
 
+import numpy as np
+
 if __name__ == '__main__':
-    nationalities = []
     model = WorldModel(100)
     for i in range(100):
         model.step()
 
+    agent_counts = np.zeros((model.grid.width, model.grid.height))
     for agent in model.schedule.agents:
-        nationalities.append(int(agent.nationalism))
+        x, y = agent.pos
+        agent_counts[x][y] = int(agent.nationalism)
 
-    plt.hist(nationalities, bins=range(max(nationalities)+1))
+    plt.imshow(agent_counts, interpolation='nearest')
+    plt.colorbar()
     plt.show()
