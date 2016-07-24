@@ -10,5 +10,5 @@ if __name__ == '__main__':
     for agent in model.schedule.agents:
         nationalities.append(int(agent.nationalism))
 
-plt.hist(nationalities, bins=range(max(nationalities)+1))
-plt.show()
+    plt.hist(nationalities, bins=range(max(nationalities)+1))
+    plt.show()
