@@ -1,17 +1,16 @@
-from RacismBehavior.agent import RacismAgent
 
 from mesa import  Agent
-
 import  random
+from behaviors import racism
 
 Ethnicities = [i for i in range(10)]
 
 class PersonAgent(Agent):
 
-    behaviors = [RacismAgent]
+    behaviors = [racism]
 
     def __init__(self, **kwargs):
-
+        self.nationalism = random.randint(1,20)
         self.ethnicity = kwargs.get('ethnicity')
         self.unique_id = kwargs.get('unique_id')
 
@@ -26,6 +25,5 @@ class PersonAgent(Agent):
 
     def step(self, model):
         self.move(model)
-        for behavior in self.behaviors:
-            _behavior = behavior(**self.__dict__)
-            _behavior.step(model)
+        for behaviour in self.behaviors:
+            behaviour(self, model)
