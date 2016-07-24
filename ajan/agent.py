@@ -4,7 +4,6 @@ import  random
 from behaviors import racism
 
 Ethnicities = [i for i in range(10)]
-
 class PersonAgent(Agent):
 
     behaviors = [racism]
@@ -24,6 +23,9 @@ class PersonAgent(Agent):
 
 
     def step(self, model):
-        self.move(model)
+        if self.nationalism > 50:
+            self.move(model)
+
         for behaviour in self.behaviors:
             behaviour(self, model)
+
