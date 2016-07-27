@@ -12,3 +12,6 @@ Unstable grid example:
 
 Stable grid example:
 ![stable](https://cloud.githubusercontent.com/assets/246527/17185349/6e49c62a-5439-11e6-8c14-8d737dc8e4be.png)
+
+
+![sample run](https://cloud.githubusercontent.com/assets/246527/17186215/f6daf024-543c-11e6-9cd7-13b6fe08e298.gif)
