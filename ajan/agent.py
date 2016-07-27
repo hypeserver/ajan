@@ -2,13 +2,13 @@ import random
 
 from mesa import Agent
 
-from behaviors import racism
+from behaviors import Racism
 
 Ethnicities = range(4)
 
 
 class PersonAgent(Agent):
-    behaviors = [racism]
+    behaviors = [Racism]
 
     def __init__(self, **kwargs):
         self.nationalism = random.randint(1,20)
@@ -32,7 +32,7 @@ class PersonAgent(Agent):
                 self.move_to_nearby_empty()
 
             for behaviour in self.behaviors:
-                behaviour(self, self.model)
+                behaviour(self, self.model).run()
 
     def kill(self):
         self.is_living = False
