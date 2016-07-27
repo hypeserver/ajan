@@ -1,6 +1,9 @@
 # ajan
 
-You'll need the latest mesa library. Get it with 
+Agent based simple modeling of social behaviours like education, hate, nationalism, rage, migration.
+
+
+You'll need the latest mesa library. Get it with
 
 ```
 pip3 uninstall mesa
