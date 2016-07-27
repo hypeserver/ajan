@@ -32,7 +32,7 @@ class Racism(AgentBehaviour):
     def behavior(self):
         self.calculate_hate()
 
-        if self.agent.nationalism > 10000:
+        if self.agent.nationalism > 10000 and self.agent.education < 10:
             neighbours = self.model.grid.get_neighborhood(
                 self.agent.pos,
                 moore=True,
@@ -45,4 +45,21 @@ class Racism(AgentBehaviour):
                 agent.kill()
 
 
+
+class Education(AgentBehaviour):
+
+    def calculate_education(self):
+        cellmates = self.model.grid.get_neighbors(self.agent.pos, moore=True, radius=1)
+        cellmates_more_educated = [cellmate for cellmate in cellmates if cellmate.education > self.agent.education and cellmate.is_living]
+
+        if len(cellmates_more_educated) > 4:
+            if not self.agent.education >= 20:
+                self.agent.education += 1
+        else:
+            if not self.agent.education <= 0:
+                self.agent.nationalism -= 1
+
+
+    def behavior(self):
+        self.calculate_education()
 

@@ -2,17 +2,18 @@ import random
 
 from mesa import Agent
 
-from behaviors import Racism
+from behaviors import Racism, Education
 
 Ethnicities = range(4)
 
 
 class PersonAgent(Agent):
-    behaviors = [Racism]
+    behaviors = [Racism, Education]
 
     def __init__(self, **kwargs):
         self.nationalism = random.randint(1,20)
         self.ethnicity = kwargs.get('ethnicity')
+        self.education = random.randint(1,20)
         self.is_living = True
         super().__init__(kwargs.get('unique_id'), kwargs.get('model'))
 
