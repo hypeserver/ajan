@@ -4,7 +4,7 @@ from mesa import Agent
 
 from behaviors import racism
 
-Ethnicities = [i for i in range(4)]
+Ethnicities = range(4)
 
 
 class PersonAgent(Agent):
@@ -28,7 +28,7 @@ class PersonAgent(Agent):
 
     def step(self):
         if self.is_living:
-            if self.nationalism > 20:
+            if self.nationalism > 500:
                 self.move_to_nearby_empty()
 
             for behaviour in self.behaviors:

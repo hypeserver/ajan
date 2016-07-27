@@ -13,7 +13,7 @@ def agent_portrayal(agent):
                  "Color": ethnicity_colors[agent.ethnicity]
                  }
     
-    if agent.nationalism > 25:
+    if agent.nationalism > 600:
         portrayal["Layer"] = 0
         portrayal["r"] = 1.5
 
@@ -25,11 +25,11 @@ def agent_portrayal(agent):
 
     return portrayal
 
-grid = CanvasGrid(agent_portrayal, 50, 50, 1000, 1000)
+grid = CanvasGrid(agent_portrayal, 30, 30, 1000, 1000)
 
 server = ModularServer(WorldModel,
                        [grid],
                        "Canli Bomba",
-                       400, 50, 50)
+                       400, 30, 30)
 server.port = 8889
 server.launch()
