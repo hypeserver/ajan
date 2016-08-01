@@ -19,12 +19,19 @@ class PersonAgent(Agent):
         self.nationalism = random.randint(1,20)
         self.origins = Origins.random()
 
-        # Should deprecate and use the new self.origins
-        self.ethnicity = kwargs.get('ethnicity')
+        self.ethnicity = self.dominant_origin
 
         self.education = random.randint(1,20)
         self.is_living = True
         super().__init__(kwargs.get('unique_id'), kwargs.get('model'))
+
+    @property
+    def known_origins(self):
+        return [race for race, origin in self.origins.items() if origin >= 0.25]
+
+    @property
+    def dominant_origin(self):
+        return sorted(self.origins, key=self.origins.get, reverse=True)[0]
 
     def move(self):
         self.model.grid.move_to_empty(self)
