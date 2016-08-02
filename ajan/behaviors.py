@@ -31,7 +31,7 @@ class Racism(AgentBehaviour):
     def behavior(self):
         self.calculate_hate()
 
-        if self.agent.nationalism > 10000 and self.agent.education < 10:
+        if self.agent.nationalism > 5000 and self.agent.education < 10:
             neighbours = self.model.grid.get_neighborhood(
                 self.agent.pos,
                 moore=True,
