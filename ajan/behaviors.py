@@ -3,7 +3,6 @@ import random
 BOMB_RADIUS = 2
 
 
-
 class AgentBehaviour(object):
 
     def __init__(self, agent, model):
@@ -21,13 +20,13 @@ class Racism(AgentBehaviour):
 
     def calculate_hate(self):
         cellmates = self.model.grid.get_neighbors(self.agent.pos, moore=True, radius=1)
-        cellmates_hated = [cellmate for cellmate in cellmates if cellmate.ethnicity != self.agent.ethnicity and cellmate.is_living]
 
-        if len(cellmates_hated):
-            self.agent.nationalism += len(cellmates_hated)
+        len_cellmates_hated = sum(1 for cellmate in cellmates if cellmate.ethnicity != self.agent.ethnicity and cellmate.is_living)
+
+        if len_cellmates_hated:
+            self.agent.nationalism += len_cellmates_hated
         else:
-            self.agent.nationalism = random.randint(1,20)
-
+            self.agent.nationalism = random.randint(1, 20)
 
     def behavior(self):
         self.calculate_hate()
@@ -45,7 +44,6 @@ class Racism(AgentBehaviour):
                 agent.kill()
 
 
-
 class Education(AgentBehaviour):
 
     def calculate_education(self):
@@ -58,7 +56,6 @@ class Education(AgentBehaviour):
         else:
             if not self.agent.education <= 0:
                 self.agent.nationalism -= 1
-
 
     def behavior(self):
         self.calculate_education()

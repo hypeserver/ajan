@@ -9,11 +9,14 @@ def agent_portrayal(agent):
     portrayal = {"Shape": "circle",
                  "Filled": "true",
                  "Layer": 1,
-                 "r": 0.5,
-                 "Color": ethnicity_colors[agent.ethnicity]
+                 "r": 0.9,
+                 "text": str(agent.nationalism),
+                 "text_color": "black",
+                 "Colors": agent.rsorted_known_origin_names,
+                 #"Colors": ["red", "green", "blue"],
                  }
     
-    if agent.nationalism > 600:
+    if agent.nationalism > 9000:
         portrayal["Layer"] = 0
         portrayal["r"] = 1.5
 
@@ -21,15 +24,15 @@ def agent_portrayal(agent):
         portrayal["text"] = "X"
         portrayal["text_color"] = "black"
         portrayal["Layer"] = 2
-        portrayal["Color"] = "black"
+        portrayal["Colors"] = ["black"]
 
     return portrayal
 
-grid = CanvasGrid(agent_portrayal, 30, 30, 1000, 1000)
+grid = CanvasGrid(agent_portrayal, 15, 15, 800, 800)
 
 server = ModularServer(WorldModel,
                        [grid],
                        "Canli Bomba",
-                       400, 30, 30)
+                       100, 15, 15)
 server.port = 8889
 server.launch()

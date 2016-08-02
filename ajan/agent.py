@@ -1,4 +1,6 @@
 import random
+import operator
+from functools import lru_cache
 
 from mesa import Agent
 
@@ -19,19 +21,23 @@ class PersonAgent(Agent):
         self.nationalism = random.randint(1,20)
         self.origins = Origins.random()
 
-        self.ethnicity = self.dominant_origin
-
         self.education = random.randint(1,20)
         self.is_living = True
+
+        self.known_origins = {str(race): origin for race, origin in self.origins.items() if origin >= 0.25}
+        self.known_origin_names = [str(race) for race, origin in self.origins.items() if origin >= 0.25]
+        self.sorted_known_origins = sorted(self.known_origins.items(), key=operator.itemgetter(1), reverse=True)
+        self.sorted_known_origin_names = list(dict(self.sorted_known_origins).keys())
+        self.rsorted_known_origin_names = list(reversed(self.sorted_known_origin_names))
+        self.sorted_origins = sorted(self.origins.items(), key=operator.itemgetter(1), reverse=True)
+        self.sorted_origin_names = tuple(dict(self.sorted_origins).keys())
+        self.dominant_origin = self.sorted_origins[0][0]
+
+        self.ethnicity = self.dominant_origin
+
+        self.cellmates_hated = 0
+
         super().__init__(kwargs.get('unique_id'), kwargs.get('model'))
-
-    @property
-    def known_origins(self):
-        return [race for race, origin in self.origins.items() if origin >= 0.25]
-
-    @property
-    def dominant_origin(self):
-        return sorted(self.origins, key=self.origins.get, reverse=True)[0]
 
     def move(self):
         self.model.grid.move_to_empty(self)
@@ -54,6 +60,8 @@ class PersonAgent(Agent):
     def kill(self):
         self.is_living = False
 
+    def __repr__(self):
+        return str(self.ethnicity) + " " + str(self.is_living)
 
 class Ethnicity(object):
     def __init__(self, name, colour, native_languages, likes, hates):
@@ -74,6 +82,7 @@ class Ethnicity(object):
 
 
 class Origins(dict):
+
     def __missing__(self, key):
         return 0
 
@@ -114,3 +123,4 @@ class Origins(dict):
             origins[key] /= total_weight
 
         return origins
+

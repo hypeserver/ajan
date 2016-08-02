@@ -3,11 +3,11 @@
 Agent based simple modeling of social behaviours like education, hate, nationalism, rage, migration.
 
 
-You'll need the latest mesa library. Get it with
+You'll need the latest mesa library with gradient patch. Get it with
 
 ```
 pip3 uninstall mesa
-pip3 install git+https://github.com/projectmesa/mesa.git
+pip3 install https://github.com/yigitbey/mesa/archive/patch-1.zip
 ```
 
 Unstable grid example:
