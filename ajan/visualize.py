@@ -33,6 +33,6 @@ grid = CanvasGrid(agent_portrayal, 25, 25, 800, 800)
 server = ModularServer(WorldModel,
                        [grid],
                        "Canli Bomba",
-                       300, 25, 25)
+                       250, 25, 25)
 server.port = 8889
 server.launch()
